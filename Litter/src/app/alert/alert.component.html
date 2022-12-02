@@ -1,0 +1,3 @@
+<div class={{alertService.typeOfAlert}} *ngIf="alertService.alert.length" id="alertContainer">
+  <div class="messages" *ngFor='let alert of alertService.alert'> {{alert}} </div>
+</div>
