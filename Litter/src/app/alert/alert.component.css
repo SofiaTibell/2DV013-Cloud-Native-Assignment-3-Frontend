@@ -1,0 +1,27 @@
+#alertContainer {
+  position: absolute;
+  width: 100%;
+  top: 60px;
+  text-align: center;
+}
+
+.messages {
+  word-wrap: break-word;
+  max-width: 100%;
+  padding: 10px;
+}
+
+.alert {
+  background-color: #f2dede;
+  color: #a94442;
+}
+
+.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+.none {
+  background-color: #d9edf7;
+  color: #31708f;
+}

@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <img id="svg" src="assets/svg/litterIcon.svg">
+    <ul class="navbar-nav">
+      <li class="nav-item" *ngIf="this.authService.isLoggedIn">
+        <a class="nav-link"routerLink="./profile">My Profile</a>
+      </li>
+      <li class="nav-item" *ngIf="this.authService.isLoggedIn">
+        <a class="nav-link" routerLink="./sandbox">Sandbox</a>
+      </li>
+      <li class="nav-item" *ngIf="this.authService.isLoggedIn">
+        <a class="nav-link" routerLink="./cats">Other cats</a>
+      </li>
+      <li class="nav-item" *ngIf="!this.authService.isLoggedIn">
+        <a class="nav-link" (click)="onLoginClick()">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="this.authService.isLoggedIn">
+        <a class="nav-link" (click)="onLogoutClick()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
