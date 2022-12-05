@@ -13,6 +13,8 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor'
 import { environment } from 'src/environments/environment';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { UsersComponent } from './users/users.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { UsersComponent } from './users/users.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule, 
+    BrowserAnimationsModule
   ],
   providers: [
     {
