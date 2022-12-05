@@ -1,1 +1,14 @@
-<p>sandbox works!</p>
+<div class="wrapper">
+  <div class="litter-box" >
+    <div class="header">
+    <h1>Sandbox</h1>
+    </div>
+    <div class="message-box">
+       <li *ngFor="let message of messages; let i = index"><strong>{{message.authorId}}:</strong> {{message.text}}</li>
+    </div>
+    <section>
+    <textarea [(ngModel)]="textareaValue" placeholder="write your message!" (keyup.enter)="sendMessage()"></textarea>
+     <button (click)="sendMessage()">Send</button>
+    </section>
+  </div>
+</div>
