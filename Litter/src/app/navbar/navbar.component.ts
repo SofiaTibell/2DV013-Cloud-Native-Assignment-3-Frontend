@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  navbarOpen = false;
 
   constructor(public authService: AuthService) { }
 
@@ -16,7 +17,11 @@ export class NavbarComponent implements OnInit {
   }
 
   onLoginClick(): void {
-    this.authService.login();
+    this.authService.loginHref();
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 
   ngOnInit(): void {

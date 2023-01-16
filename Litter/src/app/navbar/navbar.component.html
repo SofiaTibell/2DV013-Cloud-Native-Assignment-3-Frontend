@@ -1,14 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <img id="svg" src="assets/svg/litterIcon.svg">
-    <ul class="navbar-nav">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <img id="svg" src="assets/svg/litterIcon.svg">
+  <div class="navbar-collapse collapse" [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav me-auto">
       <li class="nav-item" *ngIf="this.authService.isLoggedIn">
-        <a class="nav-link"routerLink="./profile">My Profile</a>
+        <a class="nav-link"routerLink="./profile">My Pedigree chart</a>
       </li>
       <li class="nav-item" *ngIf="this.authService.isLoggedIn">
-        <a class="nav-link" routerLink="./sandbox">Sandbox</a>
+        <a class="nav-link" routerLink="./sandbox">Litter box</a>
       </li>
-      <li class="nav-item" *ngIf="this.authService.isLoggedIn">
+      <li class="nav-item">
         <a class="nav-link" routerLink="./cats">Other cats</a>
       </li>
       <li class="nav-item" *ngIf="!this.authService.isLoggedIn">
@@ -20,4 +23,3 @@
     </ul>
   </div>
 </nav>
-

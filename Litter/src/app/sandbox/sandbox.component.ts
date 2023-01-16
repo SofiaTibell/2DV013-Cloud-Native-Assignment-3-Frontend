@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../services/alert.service';
+import { AuthService } from '../services/auth.service';
 import { ResourceService } from '../services/resource.service'
+
+type Messages = {
+  text: string,
+  authorId: string,
+  createdAt: string
+};
 
 @Component({
   selector: 'app-sandbox',
@@ -7,20 +15,37 @@ import { ResourceService } from '../services/resource.service'
   styleUrls: ['./sandbox.component.css']
 })
 export class SandboxComponent implements OnInit {
-  messages = [
-    { text: "Our first message", authorId: 'Burmese' }
-  ];
+  userId = ''
+  users = new Map();
+  messages: Array<Messages> = new Array();
   textareaValue = '';
-  constructor(public resourceService: ResourceService) {
+  constructor(private alertService: AlertService, public resourceService: ResourceService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.resourceService.getMessages()
+    this.userId = this.authService.getId()
+    this.authService.getUsers()
     .subscribe((res: any) => {
-      res.forEach((element: { text: string; authorId: string; }) => {
+      res.forEach((element: { id: string; login: string;}) => {
+          this.users.set(element.id, element.login)
+      });
+    });
+
+    this.uppdateChat()
+  }
+
+  uppdateChat() {
+    this.messages = new Array();
+    this.resourceService.getSubscribeLits()
+    .subscribe((res: any) => {
+      res.forEach((element: {
+        createdAt: string; message: string; creatorId: string; }) => {
+          const time = element.createdAt.substring(0, element.createdAt.indexOf('.'));
+          const timeAndDateSeperated = time.replace("T", " ");
         this.messages.push({
-          text: element.text,
-          authorId: element.authorId
+          text: element.message,
+          authorId: this.users.get(element.creatorId),
+          createdAt: timeAndDateSeperated
         });
       });
     });
@@ -28,8 +53,17 @@ export class SandboxComponent implements OnInit {
 
   sendMessage() {
     if (this.textareaValue.trim() !== "") {
-      this.resourceService.emit({ text: this.textareaValue });
-      this.textareaValue = '';
+      if (this.textareaValue.length > 42) {
+        this.alertService.add('Too long message', 'alert');
+        this.uppdateChat()
+        this.textareaValue = '';
+      } else {
+        this.resourceService.send(this.textareaValue)
+        .subscribe((res: any) => {
+          this.uppdateChat()
+          this.textareaValue = '';
+        });
+      }
     }
   }
 

@@ -8,6 +8,11 @@
         <p class="text-muted mb-0">{{ user.email }}</p>
       </div>
     </div>
-    <a class="btn btn-link btn-rounded btn-sm" href="#" role="button">Chat</a>
+    <a class="btn btn-link btn-rounded btn-sm" (click)="onClick(user.id)" role="button">Pedigree chart</a>
   </li>
 </ul>
+
+<div *ngIf="show" class="container">
+  <button aria-label='delete item' (click)="onClose()" type='button'>X</button>
+  <app-profile [userId]="userId" [MyProfile]="MyProfile" [subscribing]="subscribing"></app-profile>
+</div>

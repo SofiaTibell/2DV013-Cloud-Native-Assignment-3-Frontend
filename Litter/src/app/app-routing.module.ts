@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CallbackComponent } from './callback/callback.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ProfileComponent } from './profile/profile.component'
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { UsersComponent } from './users/users.component';
@@ -8,7 +10,7 @@ import { UsersComponent } from './users/users.component';
 const routes: Routes = [
   {
     path: 'profile',
-    component: ProfileComponent,
+    component: MyProfileComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -19,7 +21,10 @@ const routes: Routes = [
   {
     path: 'cats',
     component: UsersComponent,
-    canActivate: [AuthGuard]
+  },
+  {
+    path: 'callback',
+    component: CallbackComponent
   },
 ];
 

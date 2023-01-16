@@ -10,11 +10,15 @@ import { SandboxComponent } from './sandbox/sandbox.component';
 import { AlertComponent } from './alert/alert.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor'
+import { AuthconfigInterceptor } from './interceptors/authconfig.interceptor';
 import { environment } from 'src/environments/environment';
 import { BaseUrlInterceptor } from './interceptors/base-url.interceptor';
 import { UsersComponent } from './users/users.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CallbackComponent } from './callback/callback.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     SandboxComponent,
     AlertComponent,
-    UsersComponent
+    UsersComponent,
+    CallbackComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NgbModule,
     FormsModule, 
+    MatProgressSpinnerModule,
     BrowserAnimationsModule
   ],
   providers: [
@@ -41,6 +48,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: BaseUrlInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthconfigInterceptor,
       multi: true,
     },
     {

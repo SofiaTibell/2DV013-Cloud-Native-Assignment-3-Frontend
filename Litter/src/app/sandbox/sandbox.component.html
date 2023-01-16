@@ -1,10 +1,29 @@
 <div class="wrapper">
   <div class="litter-box" >
     <div class="header">
-    <h1>Sandbox</h1>
+    <h1>Litter box</h1>
     </div>
     <div class="message-box">
-       <li *ngFor="let message of messages; let i = index"><strong>{{message.authorId}}:</strong> {{message.text}}</li>
+      <li *ngFor="let message of messages; let i = index">
+        <div *ngIf="message.authorId !== this.users.get(this.userId)" class="d-flex justify-content-start" >
+          <p class="small mb-1">{{message.authorId}} &#160;</p>
+          <p class="small mb-1 text-muted">{{message.createdAt}}</p>
+        </div>
+        <div *ngIf="message.authorId !== this.users.get(this.userId)" class="d-flex flex-row justify-content-start">
+          <div>
+            <p class="small p-2 ms-3 mb-3 rounded-3" style="background-color: #ffffff;">{{message.text}}</p>
+          </div>
+        </div>
+        <div *ngIf="message.authorId === this.users.get(this.userId)" class="d-flex justify-content-end" >
+          <p class="small mb-1">{{message.authorId}} &#160;</p>
+          <p class="small mb-1 text-muted">{{message.createdAt}}</p>
+        </div>
+        <div *ngIf="message.authorId === this.users.get(this.userId)" class="d-flex flex-row justify-content-end">
+          <div>
+            <p class="small p-2 ms-3 mb-3 rounded-3" style="background-color: #ffffff;">{{message.text}}</p>
+          </div>
+        </div>
+      </li>
     </div>
     <section>
     <textarea [(ngModel)]="textareaValue" placeholder="write your message!" (keyup.enter)="sendMessage()"></textarea>

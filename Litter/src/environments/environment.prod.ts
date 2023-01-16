@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'set URI'
+  apiUrl: 'http://cscloud6-197.lnu.se',
 };
